@@ -8,8 +8,7 @@ optimised elasticsearch server for wordpress elasticpress plugin
 * elasticsearch/elasticsearch:7.5.2
 * added healthcheck
 * still uses default entrypoint and cmd
-* runs by default as a single node
-* xpack disabled
+* runs as a single node
 
 ## Plugins
 * ingest-attachment : attachment (document/pdf) support
