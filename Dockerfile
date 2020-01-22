@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:6.3.2 AS BUILD
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.5.2 AS BUILD
 
 LABEL mantainer="Adrian Kriel <admin@extremeshok.com>" vendor="eXtremeSHOK.com"
 
@@ -16,13 +16,9 @@ RUN echo "**** Install packages ****" \
 # ignore spelling
   && elasticsearch-plugin install --batch -s analysis-phonetic
 
-EXPOSE 9200 9300
-
 HEALTHCHECK CMD curl --fail http://127.0.0.1:9200 || exit 1
 
-WORKDIR /usr/share/elasticsearch
-
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-
-# Dummy overridable parameter parsed by entrypoint
-CMD ["eswrapper"]
+# Single Node
+ENV bootstrap.memory_lock=true
+ENV discovery.type=single-node
+ENV cluster.routing.allocation.disk.threshold_enabled=false
