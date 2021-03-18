@@ -1,0 +1,32 @@
+## ReadonlyREST Guide
+# https://github.com/beshu-tech/readonlyrest-docs/blob/master/elasticsearch.md
+
+# readonlyrest:
+#     access_control_rules:
+#
+#     - name: "Require HTTP Basic Auth"
+#       type: allow
+#       auth_key: user:password
+
+# readonlyrest:
+#     access_control_rules:
+#
+#     - name: "Block 1 - only Logstash indices are accessible"
+#       type: allow # <-- default policy type is "allow", so this line could be omitted
+#       indices: ["logstash-*"] # <-- This is a rule
+#
+#     - name: "Block 2 - Blocking everything from a network"
+#       type: forbid
+#       hosts: ["10.0.0.0/24"] # <-- this is a rule
+
+# readonlyrest:
+#   enable: true
+#   access_control_rules:
+#
+#      - name: "user A indices"
+#        indices: ["index_a"]
+#        auth_key: userA:secret
+#
+#      - name: "user B indices"
+#        indices: ["indexB"]
+#        auth_key: userB:secret
