@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.5.2 AS BUILD
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.9 AS BUILD
 
 LABEL mantainer="Adrian Kriel <admin@extremeshok.com>" vendor="eXtremeSHOK.com"
 

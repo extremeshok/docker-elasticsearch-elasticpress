@@ -5,7 +5,7 @@ https://hub.docker.com/r/extremeshok/elasticsearch-elasticpress
 optimised elasticsearch server for wordpress elasticpress plugin
 
 ## Notes
-* elasticsearch/elasticsearch:7.5.2
+* elasticsearch/elasticsearch:7.9
 * added healthcheck
 * still uses default entrypoint and cmd
 * runs as a single node
