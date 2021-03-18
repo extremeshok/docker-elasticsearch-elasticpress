@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.9 AS BUILD
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.9.3 AS BUILD
 
 LABEL mantainer="Adrian Kriel <admin@extremeshok.com>" vendor="eXtremeSHOK.com"
 
@@ -15,6 +15,14 @@ RUN echo "**** Install packages ****" \
   && elasticsearch-plugin install --batch -s analysis-smartcn \
 # ignore spelling
   && elasticsearch-plugin install --batch -s analysis-phonetic
+
+COPY rootfs/readonlyrest-1.28.0_es7.9.3.zip /tmp/readonlyrest.zip
+COPY rootfs/readonlyrest.yml /etc/elasticsearch/readonlyrest.yml
+
+RUN echo "**** Install readonlyrest ****" \
+  && elasticsearch-plugin install --batch -s file:/tmp/readonlyrest.zip \
+  && echo "xpack.security.enabled: false" >> /etc/elasticsearch/elasticsearch.yml \
+  && rm -f /tmp/readonlyrest.zip
 
 HEALTHCHECK CMD curl --fail http://127.0.0.1:9200 || exit 1
 
